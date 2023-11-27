@@ -42,6 +42,20 @@ app.post("/LogIn", (req, res) => {
     //this sends a status to the front end and sends it the updated list of students
 });
 
+app.post("/LogInCode", (req, res) => {
+    //this takes the request body from the front end and adds a unique id also
+
+    studentsFile.map((student) => {
+        console.log(student)
+        if (student.accessCode === req.body.accessCode) {
+            console.log("worked")
+            res.status(201).json(student);
+        }
+    })
+
+    //this sends a status to the front end and sends it the updated list of students
+});
+
 app.post("/EditStudent", (req, res) => {
     const studentId = req.body.id;
     const studentInfo = req.body;
@@ -58,7 +72,7 @@ app.post("/EditStudent", (req, res) => {
 
     fs.writeFileSync("./data/students.json", JSON.stringify(newData));
 
-    res.status(201).json(newData);
+    res.status(201).json(studentInfo);
 });
 
 app.listen(8000, () => {
