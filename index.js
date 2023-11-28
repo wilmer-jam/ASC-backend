@@ -45,7 +45,8 @@ app.post("/LogInCode", (req, res) => {
 
     studentsFile.map((student) => {
         if (student.accessCode === req.body.accessCode) {
-            res.status(201).json(student);
+            const newStudent = { readOnly: req.body.readOnly, ...student }
+            res.status(201).json(newStudent);
         }
     })
 
