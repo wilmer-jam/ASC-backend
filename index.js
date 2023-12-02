@@ -4,11 +4,11 @@ const cors = require("cors");
 const app = express();
 const fs = require("fs");
 const { v4: uuid } = require("uuid");
-const mongoose = require("mongoose")
-const { MongoClient, ServerApiVersion } = require('mongodb');
+// const mongoose = require("mongoose")
+// const { MongoClient, ServerApiVersion } = require('mongodb');
 const port = process.env.PORT || 8000
 const md5 = require('md5')
-const User = require('./models/user.model.js')
+// const User = require('./models/user.model.js')
 
 const studentsFile = JSON.parse(fs.readFileSync("./data/students.json"));
 
@@ -16,7 +16,7 @@ app.use(cors());
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri)
+// mongoose.connect(uri)
 
 //this is a post request to make a new student, sign up
 app.post("/SignUp", (req, res) => {
@@ -33,27 +33,27 @@ app.post("/SignUp", (req, res) => {
                     semesterName: "fall2023",
                     classes: [
                         {
-                            className: "Meth",
+                            className: req.body.semesters[0].semester.classes[0].className,
                             grade: ""
                         },
                         {
-                            className: "Radding",
+                            className: req.body.semesters[0].semester.classes[1].className,
                             grade: ""
                         },
                         {
-                            className: "",
+                            className: req.body.semesters[0].semester.classes[2].className,
                             grade: ""
                         },
                         {
-                            className: "",
+                            className:req.body.semesters[0].semester.classes[3].className,
                             grade: ""
                         },
                         {
-                            className: "",
+                            className:req.body.semesters[0].semester.classes[4].className,
                             grade: ""
                         },
                         {
-                            className: "",
+                            className:req.body.semesters[0].semester.classes[5].className,
                             grade: ""
                         }
                     ]
